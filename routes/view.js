@@ -34,19 +34,19 @@ router.get("/dashboard", verifyJWT, async (req, res) => {
 
 const axios = require('axios');  // npm install axios if not installed
 
-router.get("/files/summary/:fileId", verifyJWT, async (req, res) => {
+router.post("/files/summary/:fileId", verifyJWT, async (req, res) => {
   try {
     const fileId = req.params.fileId;
 
     // Call the summary API with user's access token (assumed stored in req.cookies.accessToken)
     const accessToken = req.cookies.accessToken;
-    console.log("oki");
+    
 console.log(accessToken);
     if (!accessToken) {
       return res.status(401).send("Unauthorized - no access token");
     }
 
-   const response = await axios.get(
+   const response = await axios.post(
   `${process.env.API_BASE_URL || 'http://localhost:5000'}/api/files/summary/${fileId}`,
   {
     length: "short"
@@ -58,9 +58,6 @@ console.log(accessToken);
     }
   }
 );
-console.log("oki");
-console.log(response);
-
 
     const summary = response.data.data;  
 

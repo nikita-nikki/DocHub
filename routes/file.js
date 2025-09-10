@@ -9,6 +9,6 @@ const { fileSummary, fileUpload } = require("../controllers/file.js");
 
 router.use(verifyJWT);
 router.route("/upload").post(upload.single("file"), fileUpload);
-router.route("/summary/:fileId").get(fileSummary);
+router.route("/summary/:fileId").post(fileSummary);
 
 module.exports = { fileRouter: router };
