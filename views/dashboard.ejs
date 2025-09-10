@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>Welcome, <%= user.name %>!</h1>
+  <form action="/api/files/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".pdf,.png,.jpg,.jpeg" required />
+    <button type="submit">Upload File</button>
+  </form>
+
+  <h2>Your Files</h2>
+  <ul>
+    <% files.forEach(file => { %>
+      <li>
+        <strong><%= file.filetype %></strong> - 
+        <a href="<%= file.url %>" target="_blank">View</a> | 
+        <a href="/files/summary/<%= file._id %>">Get Summary</a>
+      </li>
+    <% }) %>
+  </ul>
+
+  <form action="/api/users/logout" method="POST">
+    <button type="submit">Logout</button>
+  </form>
+</body>
+</html>
