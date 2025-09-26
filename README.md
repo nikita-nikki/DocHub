@@ -1,26 +1,36 @@
 # DocHub
 
 *A one-sentence pitch of your project.*  
-For example: "DocHub is a collaborative platform for real-time document editing and sharing."
+DocHub is a smart tool that extracts text from PDFs or images and generates concise summaries.
+
+## Deployed URL
+
+You can access the live project here: https://dochub-iups.onrender.com/
 
 ## Description
 
-Provide a more detailed overview of your project. Explain the problem it solves and who the target audience is. What makes your project stand out?
+DocHub simplifies the process of reading lengthy documents by combining **OCR (Optical Character Recognition)** and **automatic text summarization**.  
+Users can upload PDFs or image files, and the system extracts the text content, then generates a clear and concise summary.  
+
+This tool is particularly useful for:  
+- Students preparing notes from books, scanned pages, or research papers.  
+- Professionals who need to review long reports quickly.  
+- Anyone looking to save time by reading the “essence” of documents instead of going through the entire text.  
 
 ## Features
 
-- **Real-time Collaboration:** Multiple users can edit the same document simultaneously.  
-- **Rich Text Formatting:** A full-featured editor with various formatting options.  
-- **Version History:** Track changes and revert to previous versions of a document.  
-- **Secure Sharing:** Share documents with specific users or create public links.  
-
+- **PDF & Image Support:** Upload files in PDF or image formats.  
+- **Text Extraction:** OCR extracts text from scanned pages or images.  
+- **Smart Summarization:** Generates concise summaries of extracted text.  
+- **User-Friendly Interface:** Simple upload and summary viewing process.  
 
 ## Technologies Used
 
-- **Frontend:** React, Redux, Slate.js  
-- **Backend:** Node.js, Express.js, Socket.IO  
+- **Frontend:** React  
+- **Backend:** Node.js, Express.js  
 - **Database:** MongoDB  
-- **Authentication:** JWT (JSON Web Tokens)  
+- **OCR:** Tesseract.js  
+- **Summarization:** NLP-based text summarizer (e.g., Hugging Face Transformers / custom model)  
 - **Deployment:** Docker, AWS  
 
 ## Installation
@@ -37,7 +47,7 @@ Follow these steps to get a development environment running:
     cd DocHub
     ```
 
-3. **Install  dependencies:**
+3. **Install dependencies:**
     ```bash
     npm install
     ```
@@ -54,12 +64,15 @@ Follow these steps to get a development environment running:
     ```bash
     # Run the backend server
     npm start
-
     ```
 
 ## Usage
 
-Showcase how to use your application. You can include screenshots, GIFs, or code snippets to demonstrate key functionalities.
+1. Open the deployed app using the link above.  
+2. Upload a **PDF file** or an **image file** containing text.  
+3. The system will automatically **extract text** from the uploaded file.  
+4. Once processed, a **summary** of the extracted content will be displayed.  
+5. Copy, download, or use the summary for quick reference.  
 
 ## Contributing
 
@@ -73,3 +86,4 @@ Showcase how to use your application. You can include screenshots, GIFs, or code
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
