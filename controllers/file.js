@@ -74,3 +74,10 @@ module.exports.fileSummary = asyncHandler(async (req, res) => {
       new ApiResponse(200, summary, "File summary generated successfully!")
     );
 });
+
+module.exports.getFiles = asyncHandler(async (req, res) => {
+  const files = await File.find({ owner: req.user._id });
+  return res
+    .status(200)
+    .json(new ApiResponse(200, files, "Files fetched successfully!"));
+});

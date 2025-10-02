@@ -1,0 +1,102 @@
+<div class="dashboard-container">
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <h1>DocHub</h1>
+    </div>
+    <div class="navbar-actions">
+      <span class="user-info">Welcome, {{ user?.name }}!</span>
+      <button class="btn btn-outline" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="dashboard-content">
+    <!-- File Upload Section -->
+    <div class="upload-section">
+      <div class="upload-card">
+        <h2>Upload Document</h2>
+        <div
+          class="drop-zone"
+          [class.drag-over]="dragOver"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+          (drop)="onDrop($event)"
+          (click)="fileInput.click()"
+        >
+          <div class="drop-zone-content">
+            <div class="upload-icon">📁</div>
+            <p class="drop-text">Drag & drop your file here or click to select</p>
+            <p class="file-types">Supports PDF, PNG, JPG, JPEG</p>
+          </div>
+          <input
+            #fileInput
+            type="file"
+            accept=".pdf,.png,.jpg,.jpeg"
+            (change)="onFileSelected($event)"
+            style="display: none"
+          />
+        </div>
+
+        <div *ngIf="isUploading" class="upload-progress">
+          <div class="spinner"></div>
+          <span>Uploading file...</span>
+        </div>
+
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+
+        <div *ngIf="successMessage" class="success-message">
+          {{ successMessage }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Files List Section -->
+    <div class="files-section">
+      <h2>Your Documents</h2>
+
+      <div *ngIf="isLoading" class="loading-state">
+        <div class="spinner"></div>
+        <span>Loading files...</span>
+      </div>
+
+      <div *ngIf="!isLoading && files.length === 0" class="empty-state">
+        <div class="empty-icon">📄</div>
+        <p>No documents uploaded yet</p>
+        <p class="empty-subtitle">Upload your first document to get started</p>
+      </div>
+
+      <div *ngIf="!isLoading && files.length > 0" class="files-grid">
+        <div *ngFor="let file of files" class="file-card">
+          <div class="file-info">
+            <div class="file-icon">📄</div>
+            <div class="file-details">
+              <h3 class="file-name">{{ getFileName(file.url) }}</h3>
+              <p class="file-type">{{ file.filetype }}</p>
+              <p class="file-date">{{ file.createdAt | date : 'medium' }}</p>
+            </div>
+          </div>
+
+          <div class="file-actions">
+            <a [href]="file.url" target="_blank" class="btn btn-outline btn-sm"> View File </a>
+
+            <div class="summary-controls">
+              <select #summaryLength class="form-select">
+                <option value="short">Short Summary</option>
+                <option value="medium">Medium Summary</option>
+                <option value="long">Long Summary</option>
+              </select>
+              <button
+                class="btn btn-primary btn-sm"
+                (click)="generateSummary(file._id, summaryLength.value)"
+              >
+                Get Summary
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

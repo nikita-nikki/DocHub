@@ -1,0 +1,44 @@
+<div class="summary-container">
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <h1>DocHub</h1>
+    </div>
+    <div class="navbar-actions">
+      <button class="btn btn-outline" (click)="goBack()">Back to Dashboard</button>
+    </div>
+  </nav>
+
+  <div class="summary-content">
+    <div class="summary-card">
+      <div class="summary-header">
+        <h2>Document Summary</h2>
+        <p>AI-generated summary of your document</p>
+      </div>
+
+      <div *ngIf="isLoading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Generating summary...</p>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <div *ngIf="!isLoading && !errorMessage" class="summary-content-text">
+        <div class="summary-text" *ngIf="summary && summary !== 'Summary not available.'">
+          {{ summary }}
+        </div>
+        <div *ngIf="!summary || summary === 'Summary not available.'" class="no-summary">
+          <div class="no-summary-icon">📄</div>
+          <h3>Summary Not Available</h3>
+          <p>This file doesn't have a summary generated yet. Please try generating a summary from the dashboard.</p>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoading && !errorMessage" class="summary-actions">
+        <button class="btn btn-primary" (click)="goBack()">Back to Dashboard</button>
+      </div>
+    </div>
+  </div>
+</div>
